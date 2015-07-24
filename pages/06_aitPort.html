@@ -1,0 +1,151 @@
+<!-- this is the rough original -->
+
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="euc-kr">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="로보어드바이저 시각화">
+	<meta name="author" content="LinkIt.kr">
+
+	<meta http-equiv=”X-UA-Compatible” content=”IE=EmulateIE9”>
+	<meta http-equiv=”X-UA-Compatible” content=”IE=9”>
+
+	<title>Robo Advisor 데이터 시각화</title>
+	<!--Core CSS -->
+	<link href="../bs3/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
+	<link href="../css/bootstrap-reset.css" rel="stylesheet">
+	<link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="../js/jvector-map/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+	<link href="../css/clndr.css" rel="stylesheet">
+	<!--clock css-->
+	<link href="../js/css3clock/css/style.css" rel="stylesheet">
+	<!--Morris Chart CSS -->
+	<link href="../js/morris-chart/morris.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../css/style.css" rel="stylesheet">
+	<link href="../css/style-responsive.css" rel="stylesheet"/>
+	<!-- Just for debugging purposes. Don't actually copy this line! -->
+	<link href="../js/data-tables/DT_bootstrap.css" rel="stylesheet"/>
+
+	<script src="../js/jquery.js"></script>
+	<script src="../js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+
+	<script src="../js/amcharts/amcharts.js"></script>
+	<script src="http://www.amcharts.com/lib/3/serial.js"></script>
+	<script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
+ 	<script src="../js/easypiechart.min.js" type="text/javascript"></script> 
+	<!--Core js-->
+	<script src="../bs3/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.nicescroll.js"></script>
+	<script src="../js/easypiechart/jquery.easypiechart.js"></script>
+	<script src="../js/pages/06_aitPort.js"></script>
+	<script src="../js/utils.js"></script>
+	
+	<script type="text/javascript" language="javascript" src="../js/advanced-datatable/js/jquery.dataTables.js"></script>
+	</head>
+<body>
+<section id='container'>
+<header class="header fixed-top clearfix"> <!-- header must be included in order to identify the below section -->
+	<div class="brand"> <!-- this is the top menu -->
+		<a href='index.html'><img class='logo' src='../images/Android_robot.svg' alt='this is where the logo image would go'></a>
+		<div class="sidebar-toggle-box"><!-- this is what creates the circle button -->
+			<div class="fa fa-bars"></div><!-- the image is placed through css -->
+		</div>
+	</div>
+</header>
+
+<aside><!--sidebar start-->
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a href="pages/01_bigdata.html">
+                        <span>빅데이터분석</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/02_spectrum.html">
+                        <span>스팩트럼분석</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/03_strength.html">
+                        <span>Strength 분석</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="pages/04_recommend.html">
+                        <span>추천종목</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/05_aitFinder.html">
+                        <span>AIT Finder</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/06_aitPort.html">
+                        <span>AIT Port</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="pages/07_situation.html">
+                        <span>상황분석</span>
+                    </a>
+                </li>
+            </ul>
+		</div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+	<section id="main-content">
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-md-4">
+				<section class="panel">
+					<header class="panel-heading">
+						수익지수 상위 Top 5
+						<span class="tools pull-right">
+							<a href="#" class="fa fa-chevron-down"></a>
+						</span>
+					</header>
+					<div class="panel-body">
+						<div id="chart1" style="height:300px;"></div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="panel">
+					<header class="panel-heading">
+						위험지수 상위 Top 5
+						<span class="tools pull-right">
+							<a href="#" class="fa fa-chevron-down"></a>
+						</span>
+					</header>
+					<div class="panel-body">
+						<div id="chart2" style="height:300px;"></div>
+					</div>
+				</section>
+			</div>
+			<div class="col-md-4">
+				<section class="panel">
+					<header class="panel-heading">
+						상승확률 상위 Top 5
+						<span class="tools pull-right">
+							<a href="#" class="fa fa-chevron-down"></a>
+						</span>
+					</header>
+					<div class="panel-body">
+						<div id="chart3" style="height:300px;"></div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</section>
+	</section>
+</section>
+</body>
+</html>
