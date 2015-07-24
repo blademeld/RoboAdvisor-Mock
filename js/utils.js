@@ -1,15 +1,15 @@
 //mock data
 var jsonData = [
-	{'id':'000001',"name":"Company0","profit":0,"risk":0,"succ":0, 'sortSample1':'1', 'sortSample':'1'},
-	{'id':'000100',"name":"Company1","profit":250000,"risk":12,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
-	{'id':'000200',"name":"Company2","profit":225000,"risk":15,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
-	{'id':'003000',"name":"Company3","profit":200000,"risk":84,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
-	{'id':'005000',"name":"Company4","profit":185000,"risk":23,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
-	{'id':'002000',"name":"Company5","profit":175000,"risk":22,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
-	{'id':'000600',"name":"Company6","profit":165000,"risk":15,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
-	{'id':'000003',"name":"Company7","profit":155000,"risk":95,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
-	{'id':'100000',"name":"Company8","profit":145000,"risk":76,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
-	{'id':'001300',"name":"Company9","profit":135000,"risk":67,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
+	{'id':'001234',"name":"Company0","profit":0,"risk":0,"succ":0, 'sortSample1':'1', 'sortSample':'1'},
+	{'id':'001630',"name":"Company1","profit":250000,"risk":12,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
+	{'id':'001256',"name":"Company2","profit":225000,"risk":15,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
+	{'id':'001684',"name":"Company3","profit":200000,"risk":84,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
+	{'id':'005555',"name":"Company4","profit":185000,"risk":23,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
+	{'id':'008465',"name":"Company5","profit":175000,"risk":22,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
+	{'id':'001635',"name":"Company6","profit":165000,"risk":15,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
+	{'id':'011234',"name":"Company7","profit":155000,"risk":95,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
+	{'id':'012345',"name":"Company8","profit":145000,"risk":76,"succ":80, 'sortSample1':'1', 'sortSample2':'2'},
+	{'id':'018468',"name":"Company9","profit":135000,"risk":67,"succ":80, 'sortSample1':'1', 'sortSample2':'1'},
 	{'id':'001400',"name":"Company10","profit":250000,"risk":15,"succ":80, 'sortSample1':'2', 'sortSample2':'2'},
 	{'id':'000530',"name":"Company11","profit":155000,"risk":11,"succ":80, 'sortSample1':'2', 'sortSample2':'1'},
 	{'id':'000120',"name":"Company12","profit":145000,"risk":76,"succ":80, 'sortSample1':'2', 'sortSample2':'2'},
@@ -70,7 +70,7 @@ $(function() {
 * @chartName 차트 생성할 위치의 id
 * @chartVar 읽을 데이타 명
 * @chartLength 화면 표시할 데이터 갰수 
-* @chartTheme 차트 색상
+* @chartTheme 차트 색상 not in use
 *
 * @jsonData -data from server
 * @filterData  -data from user
@@ -78,6 +78,8 @@ $(function() {
 function makeMainChart(chartName, chartVar, chartLength, chartTheme){
 	var _jsonData = orderDataByKey(jsonData, chartVar);
 	
+	//to-do
+	//data filtering change this to a function once the data types are shown
 	if (filterData.select1 != ''){
 		var _filteredData = [];
 		for (var i = 0; i < _jsonData.length; i++){
@@ -97,17 +99,17 @@ function makeMainChart(chartName, chartVar, chartLength, chartTheme){
 		_jsonData = _filteredData;
 	}
 	
-	//갰수로 높이 조정
-	$('#'+chartName).css('height', (chartLength*50+100)+'px');
-	
 	if (chartLength == null){
 		chartLength = 5;
 	} else if (chartLength > _jsonData.length){
 		chartLength = _jsonData.length;
 	}
-	if (chartTheme == null || chartTheme > chartColor.length){
+	//갰수로 높이 조정
+	$('#'+chartName).css('height', (chartLength*50+100)+'px');
+	
+/* 	if (chartTheme == null || chartTheme > chartColor.length){
 		chartTheme = 0;
-	}
+	} */
 
 	//insert data from json to array
 	var dataProvider = [];
@@ -116,8 +118,9 @@ function makeMainChart(chartName, chartVar, chartLength, chartTheme){
 			"name": _jsonData[i]["name"],
 			"values": _jsonData[i][chartVar],
 			//"color": "#"+chartColor[chartTheme][i]
-			"color": "#"+_jsonData[i]['id']
+			"color": "#"+idToColor(_jsonData[i]['id'])
 		});
+		console.log(idToColor(_jsonData[i]['id']));
 	}
 	
 	var _ops = {};
@@ -152,15 +155,23 @@ function makeMainChart(chartName, chartVar, chartLength, chartTheme){
 	$('#'+chartName+'_title').text(titles[chartVar]+' 상위 top '+chartLength);
 };
 
+//to-do AmMap -- maybe?
+//to-do AmChart with baseline -- name it makeDetailChart, similar vars as EasyPieChart?
+	//see chartType 2, might need to make baseline adjustable
+	//see AiT Finder
+//to-do AmChart/AmStockChart 
+	//see situation and spectrum
+//to-do Progressbar to use instead of EasyPieChart for small graphs
+
 /** EasyPieChart 생성하는 함수
 * @chartName 차트 생성할 위치의 id
 * @chartVar 읽을 데이타 명
-* @chartType
-* @chartId
-* @chartTheme
+* @chartType not in use
+* @chartId not in use
+* @chartTheme color theme
 **/
 function makeEasyPieChart(chartName, chartVar, chartType, chartId, chartTheme){
-	if (chartType == 1){
+	// if (chartType == 1){
 		var _ops = {
 			percent: jsonData[arrayIndex]['succ'],
 			lineWidth: 20,
@@ -172,18 +183,18 @@ function makeEasyPieChart(chartName, chartVar, chartType, chartId, chartTheme){
 			color: '#5c6bc0',
 			animate: 3000
 		}
-	} else {
-		var _ops = {
-			percent: jsonData[arrayIndex]['succ'],
-			lineWidth: 70,
-			trackColor: '#fff',
-			barColor: '#f1f2f3',
-			scaleColor: '#fff',
-			size: 130,
-			lineCap: 'butt',
-			animate: 5000
-		}
-	}
+	// } else {
+		// var _ops = {
+			// percent: jsonData[arrayIndex]['succ'],
+			// lineWidth: 70,
+			// trackColor: '#fff',
+			// barColor: '#f1f2f3',
+			// scaleColor: '#fff',
+			// size: 130,
+			// lineCap: 'butt',
+			// animate: 5000
+		// }
+	// }
 	$('#'+chartName).attr('data-percent', jsonData[arrayIndex]['succ']);
 	$('#'+chartName+'_title').html(jsonData[arrayIndex]['name']);
 	$('#'+chartName+'_percent').html(jsonData[arrayIndex]['succ']);
@@ -225,6 +236,35 @@ function orderDataByKey(objArr, key){
         var x = a[key]; var y = b[key];
         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
 	})
+}
+
+//to-do label function
+//function to convert id into color
+function idToColor(itemId){
+	var r;
+	var b;
+	var g;
+	
+	if (itemId.length < 6){
+		r = itemId.substring(0,1);
+		b = itemId.substring(1,2);
+		g = itemId.substring(2,3);
+	} else {
+		r = itemId.substring(3,4);
+		b = itemId.substring(4,5);
+		g = itemId.substring(5,6);
+	}
+	
+	r = parseInt(r * 255/10);
+	b = parseInt(b * 255/10);
+	g = parseInt(g * 255/10);
+	
+	return componentToHex(r) + componentToHex(b) + componentToHex(g);
+}
+//number to hex converter
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
 }
 
 /*	혹시 미래 사용 태마
